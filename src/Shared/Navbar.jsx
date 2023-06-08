@@ -2,13 +2,15 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const navItems = <>
-        <li><Link><b>Home</b></Link></li>
-        <li><Link>Instructors</Link></li>
-        <li><Link>Classes</Link></li>
+        <li><Link to='/'><b>Home</b></Link></li>
+        <li><Link to='/instructor'>Instructors</Link></li>
+        <li><Link to='/classes'>Classes</Link></li>
+        <li><Link to='/signUp'>Sign Up</Link></li>
+        <li><Link to='/login'>Login</Link></li>
     </>
 
     return (
-            <div className="navbar max-w-screen-lg fixed z-10 bg-opacity-30 bg-black text-white">
+            <div className="navbar max-w-screen-lg fixed z-10 bg-opacity-30 bg-black mt-0 text-white">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">

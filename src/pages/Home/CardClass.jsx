@@ -5,7 +5,7 @@ const CardClass = ({data}) => {
 
     return (
         <div>
-            <div className="card w-fit bg-base-100 shadow-xl">
+            <div className="card sm:w-fit bg-base-100 shadow-xl">
                 <figure><img className='h-[230px]' src={image} alt="Shoes" /></figure>
                 <div className="card-body">
                     <h2 className="card-title">{name}</h2>
