@@ -1,0 +1,22 @@
+import React from 'react';
+
+const InsCard = ({ instructor }) => {
+    const { name, image, email } = instructor;
+
+    return (
+        <div>
+            <div className="card card-side w-full bg-base-100 shadow-xl">
+                <figure><img className='w-[220px] h-[200px]' src={image} alt="" /></figure>
+                <div className="card-body">
+                    <h2 className="card-title">{name}</h2>
+                    <p>{email}</p>
+                    <div className="card-actions justify-end">
+                        <button className="btn btn-primary">See Classes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default InsCard;

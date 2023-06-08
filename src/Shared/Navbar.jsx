@@ -18,7 +18,10 @@ const Navbar = () => {
                             {navItems}
                         </ul>
                     </div>
-                    <p className="normal-case text-2xl font-semibold">Summer Camp<br/><small>photography</small></p>
+                    <div>
+                        <img className='h-[40px] w-[55px]' src="../../public/istockphoto-1402674567-612x612.jpg" alt=""/>
+                        <p className="normal-case text-2xl font-semibold">Summer Camp</p>
+                    </div>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
