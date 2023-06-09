@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
 import { AuthContext } from "../Providers/AuthProvider";
 import { useContext } from "react";
+// import useCart from '../hooks/useCart';
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
+    // const [cart] = useCart();
 
     const handleLogOut = () => {
         logOut()
