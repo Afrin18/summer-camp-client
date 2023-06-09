@@ -1,11 +1,58 @@
-import React from 'react';
+import { AuthContext } from "../../Providers/AuthProvider";
+import { useContext } from "react";
+import Swal from 'sweetalert2';
+import { useNavigate, useLocation } from 'react-router-dom';
+// import useCart from '../../hooks/useCart';
 
-const CardClass = ({data}) => {
-    const {image, name, Ins_name, available_seats, price} = data;
+
+const CardClass = ({ data }) => {
+    const { _id, image, name, Ins_name, available_seats, price } = data;
+    const { user } = useContext(AuthContext);
+    // const [, refetch] = useCart();
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const handleSelect = data => {
         console.log(data);
+        if (user && user.email) {
+            const selectedCls = { name: user.displayName ,email: user.email, courseId: _id, course: name, image, Ins_name, available_seats, price }
+            fetch(`http://localhost:5000/selectcls`, {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(selectedCls)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.insertedId) {
+                        // refetch(); // refetch to update cart items
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Selected the course',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    }
+                })
+        }
+        else {
+            Swal.fire({
+                title: 'Please login to select the Course',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Login Now'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate('/login', { state: { from: location } })
+                }
+            })
+        }
     }
+
 
     return (
         <div>
