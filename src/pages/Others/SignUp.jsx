@@ -1,8 +1,15 @@
 import React from 'react';
+import { useForm } from "react-hook-form";
 import { Helmet } from 'react-helmet-async';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const SignUp = () => {
+    const { register, handleSubmit, formState: { errors } } = useForm();
+
+    const onSubmit = data => {
+        console.log(data);
+    }
+
     return (
         <div>
             <Helmet>
@@ -15,36 +22,47 @@ const SignUp = () => {
                         <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
                     </div>
                     <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                        <form className="card-body">
+                        <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Name</span>
                                 </label>
-                                <input type="text" name="name" placeholder="name" required className="input input-bordered" />
+                                <input type="text" {...register("name", { required: true })} name="name" placeholder="name" className="input input-bordered" />
+                                {errors.name && <span className='text-red-600'>Name is required</span>}
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Photo URL</span>
                                 </label>
-                                <input type="text" placeholder="photoURL" className="input input-bordered" />
+                                <input type="text" {...register("photoURL", { required: true })} placeholder="photoURL" className="input input-bordered" />
+                                {errors.photoURL && <span className='text-red-600'>Photo URL is required</span>}
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
-                                <input type="email" name="email" placeholder="email" required className="input input-bordered" />
+                                <input type="email" {...register("email", { required: true })} name="email" placeholder="email" className="input input-bordered" />
+                                {errors.email && <span className='text-red-600'>Email is required</span>}
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Password</span>
                                 </label>
-                                <input type="password" name="password" placeholder="password" required className="input input-bordered" />
+                                <input type="password" {...register("password", { required: true,
+                                minLength: 6,
+                                maxLength: 20,
+                                pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/ })} name="password" placeholder="password" className="input input-bordered" />
+                            {errors.password && <span className='text-red-600'>Password is required</span>}
+                                {errors.password?.type === 'minLength' && <span className='text-red-600'>Password must be 6 characters</span>}
+                                {errors.password?.type === 'maxLength' && <span className='text-red-600'>Password must be less then 20 characters</span>}
+                                {errors.password?.type === 'pattern' && <span className='text-red-600'>Password must have one uppercase, one lowercase, one number and one special character</span>}
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Confirm Password</span>
                                 </label>
-                                <input type="password" name="confirm" placeholder="confirm password" required className="input input-bordered" />
+                                <input type="password" {...register("confirm", { required: true })} name="confirm" placeholder="confirm password" className="input input-bordered" />
+                                {errors.confirm && <span className='text-red-600'>Confirm Password is required</span>}
                             </div>
                             <div className="form-control mt-6">
                                 <input className="btn btn-primary" type="submit" value="Sign Up" />
