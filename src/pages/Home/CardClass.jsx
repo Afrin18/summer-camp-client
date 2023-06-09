@@ -3,6 +3,10 @@ import React from 'react';
 const CardClass = ({data}) => {
     const {image, name, Ins_name, available_seats, price} = data;
 
+    const handleSelect = data => {
+        console.log(data);
+    }
+
     return (
         <div>
             <div className="card sm:w-fit bg-base-100 shadow-xl">
@@ -13,7 +17,7 @@ const CardClass = ({data}) => {
                     <p>Available seats: {available_seats}</p>
                     <p>Price: {price}</p>
                     <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Select</button>
+                        <button onClick={() => handleSelect(data)} className="btn btn-primary">Select</button>
                     </div>
                 </div>
             </div>
