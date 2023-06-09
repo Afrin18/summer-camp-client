@@ -9,6 +9,7 @@ import SignUp from '../pages/Others/SignUp';
 import Login from '../pages/Others/Login';
 import PrivateRoute from './PrivateRoute';
 import Dashboard from '../Layout/Dashboard';
+import MyCourse from '../pages/Dashboard/MyCourse';
 
 
 export const router = createBrowserRouter([
@@ -16,30 +17,36 @@ export const router = createBrowserRouter([
     path: "/",
     element: <Main></Main>,
     children: [
-        {
-            path: '/',
-            element: <Home></Home>
-        },
-        {
-          path: '/instructor',
-          element: <Instructors></Instructors>
-        },
-        {
-          path: '/classes',
-          element: <Classes></Classes>
-        },
-        {
-          path: '/signUp',
-          element: <SignUp></SignUp>
-        },
-        {
-          path: '/login',
-          element: <Login></Login>
-        },
-        {
-          path: '/dashboard',
-          element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>
-        }
+      {
+        path: '/',
+        element: <Home></Home>
+      },
+      {
+        path: '/instructor',
+        element: <Instructors></Instructors>
+      },
+      {
+        path: '/classes',
+        element: <Classes></Classes>
+      },
+      {
+        path: '/signUp',
+        element: <SignUp></SignUp>
+      },
+      {
+        path: '/login',
+        element: <Login></Login>
+      }
     ]
   },
+  {
+    path: 'dashboard',
+    element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+    children: [
+      {
+        path: 'myCourse',
+        element: <MyCourse></MyCourse>
+      }
+    ]
+  }
 ]);
