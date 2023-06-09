@@ -10,6 +10,7 @@ import Login from '../pages/Others/Login';
 import PrivateRoute from './PrivateRoute';
 import Dashboard from '../Layout/Dashboard';
 import MyCourse from '../pages/Dashboard/MyCourse';
+import AllUsers from '../pages/Dashboard/AllUsers';
 
 
 export const router = createBrowserRouter([
@@ -46,6 +47,10 @@ export const router = createBrowserRouter([
       {
         path: 'myCourse',
         element: <MyCourse></MyCourse>
+      },
+      {
+        path: 'mngUser',
+        element: <AllUsers></AllUsers>
       }
     ]
   }
