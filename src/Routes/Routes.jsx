@@ -11,6 +11,7 @@ import PrivateRoute from './PrivateRoute';
 import Dashboard from '../Layout/Dashboard';
 import MyCourse from '../pages/Dashboard/MyCourse';
 import AllUsers from '../pages/Dashboard/AllUsers';
+import UHome from '../Layout/UHome';
 
 
 export const router = createBrowserRouter([
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
     path: 'dashboard',
     element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
     children: [
+      {
+        path: 'uHome',
+        element: <UHome></UHome>
+      },
       {
         path: 'myCourse',
         element: <MyCourse></MyCourse>

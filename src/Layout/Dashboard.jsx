@@ -2,10 +2,12 @@ import { Outlet, NavLink } from 'react-router-dom';
 import { FaHome, FaBook, FaUsers } from 'react-icons/fa';
 import { Helmet } from 'react-helmet-async';
 import useCart from '../hooks/useCart';
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
     const [cart] = useCart();
-    const isAdmin = true;
+    // const isAdmin = true;
+    const [isAdmin] = useAdmin();
 
     return (
         <>
@@ -38,7 +40,7 @@ const Dashboard = () => {
                         <>
                         <h2 className='text-2xl mt-4 font-semibold'>User Dashboard</h2>
                         <div className="divider"></div>
-                        <li><NavLink to='/'><FaHome></FaHome>User Home</NavLink></li>
+                        <li><NavLink to='/dashboard/uHome'><FaHome></FaHome>User Home</NavLink></li>
                         <li><NavLink to='/dashboard/enrollCls'><FaBook></FaBook>My Enrolled Classes</NavLink></li>
                         <li><NavLink to='/dashboard/myCourse'><FaUsers></FaUsers>My Selected Classes
                         <span className="badge badge-secondary">+{cart?.length || 0}</span></NavLink></li>
