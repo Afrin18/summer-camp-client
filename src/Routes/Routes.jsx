@@ -12,6 +12,9 @@ import Dashboard from '../Layout/Dashboard';
 import MyCourse from '../pages/Dashboard/MyCourse';
 import AllUsers from '../pages/Dashboard/AllUsers';
 import UHome from '../Layout/UHome';
+import AddCls from '../pages/Dashboard/Instructor/AddCls';
+import MyCls from '../pages/Dashboard/Instructor/MyCls';
+import AdminRoute from '../Routes/AdminRoute'; 
 
 
 export const router = createBrowserRouter([
@@ -50,12 +53,20 @@ export const router = createBrowserRouter([
         element: <UHome></UHome>
       },
       {
-        path: 'myCourse',
-        element: <MyCourse></MyCourse>
+        path: 'mngUser',
+        element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
       },
       {
-        path: 'mngUser',
-        element: <AllUsers></AllUsers>
+        path: 'addCls',
+        element: <AddCls></AddCls>
+      },
+      {
+        path: 'myCls',
+        element: <MyCls></MyCls>
+      },
+      {
+        path: 'myCourse',
+        element: <MyCourse></MyCourse>
       }
     ]
   }

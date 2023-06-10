@@ -3,6 +3,7 @@ import { AuthContext } from "../Providers/AuthProvider";
 import { useContext } from "react";
 import useAxiosSecure from "./useAxiosSecure";
 
+
 const useAdmin = () => {
     const { user } = useContext(AuthContext);
     const [axiosSecure] = useAxiosSecure();
