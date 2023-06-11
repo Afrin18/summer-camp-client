@@ -1,7 +1,9 @@
-import React from 'react';
 
 const InsCard = ({ instructor }) => {
     const { name, image, email } = instructor;
+    if(instructor.length > 6){
+
+    }
 
     return (
         <div>

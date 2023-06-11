@@ -4,16 +4,33 @@ import { useContext } from "react";
 import useAxiosSecure from "./useAxiosSecure";
 
 const useInstructor = () => {
-    const { user } = useContext(AuthContext);
+    const { user, loading } = useContext(AuthContext);
+    
     const [axiosSecure] = useAxiosSecure();
-    const {data: isInstructor, isLoading: isInstructorLoading} = useQuery({
-        queryKey: ['isInstructor', user?.email],
+
+    const { refetch, data: instructors = [] } = useQuery({
+     queryKey: ['instructors', user?.email],
+        enabled: !loading,
         queryFn: async () => {
-            const res = await axiosSecure.get(`/users/instructor/${user?.email}`);
-            console.log('is instructor response', res)
-            return res.data.instructor;
-        }
+            const res = await axiosSecure(`/instructor?email=${user?.email}`)
+            console.log('res from axios', res)
+            return res.data;
+        },
     })
-    return [isInstructor, isInstructorLoading]
+    return [instructors, refetch]
 }
 export default useInstructor;
+
+
+
+// const { user } = useContext(AuthContext);
+//     const [axiosSecure] = useAxiosSecure();
+//     const {data: isInstructor, isLoading: isInstructorLoading} = useQuery({
+//         queryKey: ['isInstructor', user?.email],
+//         queryFn: async () => {
+//             const res = await axiosSecure.get(`/users/instructor/${user?.email}`);
+//             console.log('is instructor response', res)
+//             return res.data.instructor;
+//         }
+//     })
+//     return [isInstructor, isInstructorLoading]
