@@ -6,6 +6,7 @@ const UpdateClass = () => {
             <Helmet>
                 <title>Summer Camp | Update Class</title>
             </Helmet>
+            
         </div>
     );
 };

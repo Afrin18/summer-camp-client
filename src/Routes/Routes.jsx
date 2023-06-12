@@ -10,6 +10,7 @@ import Login from '../pages/Others/Login';
 import PrivateRoute from './PrivateRoute';
 import Dashboard from '../Layout/Dashboard';
 import MyCourse from '../pages/Dashboard/MyCourse';
+import Payment from '../pages/Dashboard/Payment';
 import AllUsers from '../pages/Dashboard/AllUsers';
 import UHome from '../Layout/UHome';
 import AddCls from '../pages/Dashboard/Instructor/AddCls';
@@ -77,6 +78,10 @@ export const router = createBrowserRouter([
       {
         path: 'myCourse',
         element: <MyCourse></MyCourse>
+      },
+      {
+        path: 'payment/:id',
+        element: <Payment></Payment>
       }
     ]
   }

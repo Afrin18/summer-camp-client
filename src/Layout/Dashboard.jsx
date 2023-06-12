@@ -33,18 +33,18 @@ const Dashboard = () => {
 
                             </> :
                                 <>
-                                    {/* <h2 className='text-2xl mt-4 font-semibold'>User Dashboard</h2>
+                                    <h2 className='text-2xl mt-4 font-semibold'>User Dashboard</h2>
                                     <div className="divider"></div>
                                     <li><NavLink to='/dashboard/uHome'><FaHome></FaHome>User Home</NavLink></li>
                                     <li><NavLink to='/dashboard/enrollCls'><FaBook></FaBook>My Enrolled Classes</NavLink></li>
                                     <li><NavLink to='/dashboard/myCourse'><FaUsers></FaUsers>My Selected Classes
-                        <span className="badge badge-secondary">+{cart?.length || 0}</span></NavLink></li> */}
+                        <span className="badge badge-secondary">+{cart?.length || 0}</span></NavLink></li>
 
-                                    <h2 className='text-2xl mt-4 font-semibold'>Instructor Dashboard</h2>
+                                    {/* <h2 className='text-2xl mt-4 font-semibold'>Instructor Dashboard</h2>
                                     <div className="divider"></div>
                                     <li><NavLink to='/dashboard/uHome'><FaHome></FaHome>User Home</NavLink></li>
                                     <li><NavLink to='/dashboard/addCls'><FaBook></FaBook>Add a Class</NavLink></li>
-                                    <li><NavLink to='/dashboard/myCls'><FaUsers></FaUsers>My Classes</NavLink></li>
+                                    <li><NavLink to='/dashboard/myCls'><FaUsers></FaUsers>My Classes</NavLink></li> */}
 
 
                                 </>

@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import useCart from '../../hooks/useCart';
 import { FaTrashAlt } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const MyCourse = () => {
@@ -81,7 +82,7 @@ const MyCourse = () => {
                                     <button onClick={() => handleDelete(data)} className="btn btn-ghost btn-md bg-red-600 text-white"><FaTrashAlt></FaTrashAlt></button>
                                 </td>
                                 <td>
-                                    <button className="btn btn-accent">Pay</button>
+                                    <Link to={`/dashboard/payment/${data._id}`}><button className="btn btn-accent">Pay</button></Link>
                                 </td>
                             </tr>)
                         }
