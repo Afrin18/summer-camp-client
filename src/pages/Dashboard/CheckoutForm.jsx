@@ -1,10 +1,26 @@
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
+import { AuthContext } from "../../Providers/AuthProvider";
+import { useContext } from "react";
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ price }) => {
     const stripe = useStripe();
     const elements = useElements();
+    const { user } = useContext(AuthContext);
     const [cardError, setCardError] = useState('');
+    const [clientSecret, setClientSecret] = useState('');
+    const [axiosSecure] = useAxiosSecure();
+    const [processing, setProcessing] = useState(false);
+    const [transactionId, setTransactionId] = useState('');
+
+    useEffect(() => {
+        axiosSecure.post('/create-payment-intent', { price })
+            .then(res => {
+                console.log(res.data.clientSecret)
+                setClientSecret(res.data.clientSecret)
+            })
+    }, [price, axiosSecure])
 
 
     const handleSubmit = async (event) => {
@@ -19,8 +35,7 @@ const CheckoutForm = () => {
             return;
         }
         const { error, paymentMethod } = await stripe.createPaymentMethod({
-            type: 'card',
-            card,
+            type: 'card', card,
         })
 
         if (error) {
@@ -31,6 +46,23 @@ const CheckoutForm = () => {
             setCardError('');
             console.log('payment Method', paymentMethod)
         }
+        const {paymentIntent, error: confirmError} = await stripe.confirmCardPayment(clientSecret, {
+                payment_method: {
+                    card: card,
+                    billing_details: {
+                        name: user?.displayName || 'unknown',
+                        email: user?.email || 'unknown'
+                    },
+                },
+            },
+            );
+            if(confirmError){
+                console.log(confirmError)
+            }
+            console.log('payment intent', paymentIntent)
+            if(paymentIntent.status === 'succeeded'){
+                setTransactionId(paymentIntent.id);
+            };
     }
 
 
@@ -53,7 +85,7 @@ const CheckoutForm = () => {
                         },
                     }}
                 />
-                <button className='btn btn-outline btn-accent mt-6 w-full' type="submit" disabled={!stripe}> Payment Now </button>
+                <button className='btn btn-outline btn-accent mt-6 w-full' type="submit" disabled={!stripe }> Payment Now </button>
             </form>
             {cardError && <p className='text-red-600 ml-8'>{cardError}</p>}
         </>
@@ -61,3 +93,5 @@ const CheckoutForm = () => {
 };
 
 export default CheckoutForm;
+
+// || !clientSecret
